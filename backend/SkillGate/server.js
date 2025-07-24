@@ -9,15 +9,11 @@ const LessonRouter = require('./src/routes/lesson.route');
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: "https://skill-gate-chi.vercel.app", // your frontend
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  credentials: true
-}));
 
-// 👇 Important: handle preflight requests
-app.options("*", cors());
+app.use(cors());
+
+
+
 
 app.use("/user",UserRouter)
 app.use("/course",CourseRouter)
