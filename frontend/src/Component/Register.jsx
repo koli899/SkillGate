@@ -91,7 +91,7 @@ export default function Register() {
       //await new Promise((resolve) => setTimeout(resolve, 2000));
       const response = await axios({
         method: "post",
-        url: "http://localhost:8000/user/register",
+        url: "https://skillgate.onrender.com/user/register",
         data: form,
         headers: {
           "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const AdminVerify = () => {
     setLoading(true);
     const token = localStorage.getItem('token');
     try {
-      const res = await axios.get('http://localhost:8000/user/getAllUsers', {
+      const res = await axios.get('https://skillgate.onrender.com/user/getAllUsers', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const filteredUsers = (res.data.users || []).filter(
@@ -50,7 +50,7 @@ const AdminVerify = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.patch(
-        `http://localhost:8000/user/VerifyUser/${id}`,
+        `https://skillgate.onrender.com/user/VerifyUser/${id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -75,7 +75,7 @@ const AdminVerify = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:8000/user/deleteUser/${id}`, {
+      await axios.delete(`https://skillgate.onrender.com/user/deleteUser/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({

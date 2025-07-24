@@ -36,7 +36,7 @@ const Announcements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/announcement/all");
+      const res = await axios.get("https://skillgate.onrender.com/announcement/all");
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch", status: "error" });
@@ -59,7 +59,7 @@ const Announcements = () => {
       let response;
       if (editId) {
         response = await axios.patch(
-          `http://localhost:8000/announcement/update/${editId}`,
+          `https://skillgate.onrender.com/announcement/update/${editId}`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -67,7 +67,7 @@ const Announcements = () => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:8000/announcement/create",
+          "https://skillgate.onrender.com/announcement/create",
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -101,7 +101,7 @@ const Announcements = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/announcement/delete/${id}`, {
+      await axios.delete(`https://skillgate.onrender.com/announcement/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: "Announcement deleted", status: "success" });

@@ -57,7 +57,7 @@ export default function Login() {
     setMessage("");
 
     try {
-      const response = await axios.post("http://localhost:8000/user/login", form, {
+      const response = await axios.post("https://skillgate.onrender.com/user/login", form, {
         headers: { "Content-Type": "application/json" },
       });
 

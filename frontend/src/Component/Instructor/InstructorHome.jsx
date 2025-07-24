@@ -32,7 +32,7 @@ const InstructorHome = () => {
 
   const fetchAllCourses = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/course/all");
+      const res = await axios.get("https://skillgate.onrender.com/course/all");
       setAllCourses(res.data.courses);
     } catch (error) {
       toast({ title: "Failed to fetch courses", status: "error" });
@@ -41,7 +41,7 @@ const InstructorHome = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/announcement/all");
+      const res = await axios.get("https://skillgate.onrender.com/announcement/all");
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch announcements", status: "error" });

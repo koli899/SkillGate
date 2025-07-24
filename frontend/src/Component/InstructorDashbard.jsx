@@ -55,7 +55,7 @@ const InstructorDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/course/yourCourses', {
+      const response = await axios.get('https://skillgate.onrender.com/course/yourCourses', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourses(response.data.courses || []);
@@ -67,7 +67,7 @@ const InstructorDashboard = () => {
   // Move these handlers to top-level scope
   const handleOpenUpdateCourse = async (course) => {
     try {
-      const res = await axios.get(`http://localhost:8000/course/${course._id}`, {
+      const res = await axios.get(`https://skillgate.onrender.com/course/${course._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSelectedCourse(res.data.course || course);
@@ -82,7 +82,7 @@ const InstructorDashboard = () => {
   const handleUpdateCourse = async (updatedFields) => {
     try {
       await axios.patch(
-        `http://localhost:8000/course/updateCourse/${selectedCourse._id}`,
+        `https://skillgate.onrender.com/course/updateCourse/${selectedCourse._id}`,
         updatedFields,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -98,7 +98,7 @@ const InstructorDashboard = () => {
   const handleDeleteCourse = async (courseId) => {
     if (window.confirm('Are you sure you want to delete this course and all its lessons?')) {
       try {
-        await axios.delete(`http://localhost:8000/course/deleteCourse/${courseId}`, {
+        await axios.delete(`https://skillgate.onrender.com/course/deleteCourse/${courseId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast({ title: 'Course and all lessons deleted', status: 'success' });
@@ -111,7 +111,7 @@ const InstructorDashboard = () => {
 
   const fetchLessons = async (courseId) => {
     try {
-      const res = await axios.get(`http://localhost:8000/lesson/all/${courseId}`, {
+      const res = await axios.get(`https://skillgate.onrender.com/lesson/all/${courseId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // API returns { lessons: { ...course, lessons: [array] } }
@@ -151,7 +151,7 @@ const InstructorDashboard = () => {
     try {
       const courseId = addLessonModal.courseId;
       await axios.post(
-        `http://localhost:8000/lesson/create/${courseId}`,
+        `https://skillgate.onrender.com/lesson/create/${courseId}`,
         { title: newLesson.title, summary: newLesson.summary },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -172,7 +172,7 @@ const InstructorDashboard = () => {
 
   const handleUpdateLesson = async () => {
     try {
-      await axios.patch(`http://localhost:8000/lesson/update/${editLessonModal.lesson._id}`, editLesson, {
+      await axios.patch(`https://skillgate.onrender.com/lesson/update/${editLessonModal.lesson._id}`, editLesson, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: 'Lesson updated', status: 'success' });
@@ -186,7 +186,7 @@ const InstructorDashboard = () => {
   const handleDeleteLesson = async (lessonId, courseId) => {
     if (window.confirm('Are you sure you want to delete this lesson?')) {
       try {
-        await axios.delete(`http://localhost:8000/lesson/delete/${lessonId}`, {
+        await axios.delete(`https://skillgate.onrender.com/lesson/delete/${lessonId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast({ title: 'Lesson deleted', status: 'success' });

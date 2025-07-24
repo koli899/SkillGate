@@ -21,7 +21,7 @@ const EnroledCourse = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/course/yourCourses', {
+        const response = await axios.get('https://skillgate.onrender.com/course/yourCourses', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +31,7 @@ const EnroledCourse = () => {
         // Fetch lessons for each course
         courseList.forEach(async (course) => {
           try {
-            const res = await axios.get(`http://localhost:8000/lesson/all/${course._id}`, {
+            const res = await axios.get(`https://skillgate.onrender.com/lesson/all/${course._id}`, {
               headers: { Authorization: `Bearer ${token}` },
             });
             const lessonArr = Array.isArray(res.data.lessons?.lessons)

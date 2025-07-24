@@ -33,7 +33,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose }) => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `http://localhost:8000/course/updateCourse/${course._id}`,
+        `https://skillgate.onrender.com/course/updateCourse/${course._id}`,
         {
           course: form.course,
           description: form.description,
