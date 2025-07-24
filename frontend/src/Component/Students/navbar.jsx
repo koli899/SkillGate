@@ -30,7 +30,7 @@ import {
   SettingsIcon,
 } from '@chakra-ui/icons';
 import { FaUserGraduate, FaUser, FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const StudentNavbar = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -38,6 +38,7 @@ const StudentNavbar = ({ onSearch }) => {
   const userDetail = localStorage.getItem('user');
   const { name, email, role } = JSON.parse(userDetail || '{}');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -216,7 +217,13 @@ const StudentNavbar = ({ onSearch }) => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: 'teal.500' }}
+                fontWeight={location.pathname === '/student' ? 'bold' : 'normal'}
+                color={location.pathname === '/student' ? 'teal.600' : undefined}
+                bg={location.pathname === '/student' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                  Dashboard
               </Box>
@@ -226,7 +233,13 @@ const StudentNavbar = ({ onSearch }) => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: 'teal.500' }}
+                fontWeight={location.pathname === '/enrolled' ? 'bold' : 'normal'}
+                color={location.pathname === '/enrolled' ? 'teal.600' : undefined}
+                bg={location.pathname === '/enrolled' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                  Enrolled Courses
               </Box>
@@ -236,7 +249,13 @@ const StudentNavbar = ({ onSearch }) => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: 'teal.500' }}
+                fontWeight={location.pathname === '/profile' ? 'bold' : 'normal'}
+                color={location.pathname === '/profile' ? 'teal.600' : undefined}
+                bg={location.pathname === '/profile' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                  Profile
               </Box>
@@ -249,6 +268,11 @@ const StudentNavbar = ({ onSearch }) => {
                 }}
                 color="red.500"
                 cursor="pointer"
+                px={2}
+                py={1}
+                borderRadius="md"
+                fontWeight="bold"
+                _hover={{ bg: 'red.50' }}
               >
                  Logout
               </Box>

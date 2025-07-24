@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon, SettingsIcon } from '@chakra-ui/icons';
 import { FaUserTie, FaUser, FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const InstructorNav = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,6 +15,7 @@ const InstructorNav = ({ onSearch }) => {
   const userDetail = localStorage.getItem('user');
   const { name, email, role } = JSON.parse(userDetail || '{}');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -115,16 +116,55 @@ const InstructorNav = ({ onSearch }) => {
           <DrawerHeader>Instructor Menu</DrawerHeader>
           <DrawerBody>
             <VStack spacing={4} align="start" mt={4}>
-              <Box onClick={() => { navigate('/instructor'); onClose(); }} cursor="pointer" _hover={{ color: 'purple.500' }}>
+              <Box
+                onClick={() => { navigate('/instructor'); onClose(); }}
+                cursor="pointer"
+                fontWeight={location.pathname === '/instructor' ? 'bold' : 'normal'}
+                color={location.pathname === '/instructor' ? 'purple.600' : undefined}
+                bg={location.pathname === '/instructor' ? 'purple.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'purple.500', bg: 'purple.50' }}
+              >
                 Dashboard
               </Box>
-              <Box onClick={() => { navigate('/instructorDashboard'); onClose(); }} cursor="pointer" _hover={{ color: 'purple.500' }}>
+              <Box
+                onClick={() => { navigate('/instructorDashboard'); onClose(); }}
+                cursor="pointer"
+                fontWeight={location.pathname === '/instructorDashboard' ? 'bold' : 'normal'}
+                color={location.pathname === '/instructorDashboard' ? 'purple.600' : undefined}
+                bg={location.pathname === '/instructorDashboard' ? 'purple.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'purple.500', bg: 'purple.50' }}
+              >
                 My Courses
               </Box>
-              <Box onClick={() => { navigate('/profile'); onClose(); }} cursor="pointer" _hover={{ color: 'purple.500' }}>
+              <Box
+                onClick={() => { navigate('/profile'); onClose(); }}
+                cursor="pointer"
+                fontWeight={location.pathname === '/profile' ? 'bold' : 'normal'}
+                color={location.pathname === '/profile' ? 'purple.600' : undefined}
+                bg={location.pathname === '/profile' ? 'purple.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'purple.500', bg: 'purple.50' }}
+              >
                 Profile
               </Box>
-              <Box onClick={handleLogout} color="red.500" cursor="pointer">Logout</Box>
+              <Box
+                onClick={handleLogout}
+                color="red.500"
+                cursor="pointer"
+                px={2}
+                py={1}
+                borderRadius="md"
+                fontWeight="bold"
+                _hover={{ bg: 'red.50' }}
+              >Logout</Box>
             </VStack>
           </DrawerBody>
         </DrawerContent>

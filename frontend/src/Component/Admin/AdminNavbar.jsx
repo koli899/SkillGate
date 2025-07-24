@@ -23,13 +23,14 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, SettingsIcon } from "@chakra-ui/icons";
 import { FaUserShield, FaUser, FaSignOutAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AdminNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const userDetail = localStorage.getItem("user");
   const { name, email, role } = JSON.parse(userDetail || "{}");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -128,7 +129,13 @@ const AdminNavbar = () => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: "teal.500" }}
+                fontWeight={location.pathname === '/admin' ? 'bold' : 'normal'}
+                color={location.pathname === '/admin' ? 'teal.600' : undefined}
+                bg={location.pathname === '/admin' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                 Dashboard
               </Box>
@@ -138,7 +145,13 @@ const AdminNavbar = () => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: "teal.500" }}
+                fontWeight={location.pathname === '/verifyUser' ? 'bold' : 'normal'}
+                color={location.pathname === '/verifyUser' ? 'teal.600' : undefined}
+                bg={location.pathname === '/verifyUser' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                 Verify Users
               </Box>
@@ -148,7 +161,13 @@ const AdminNavbar = () => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: "teal.500" }}
+                fontWeight={location.pathname === '/instructorDashboard' ? 'bold' : 'normal'}
+                color={location.pathname === '/instructorDashboard' ? 'teal.600' : undefined}
+                bg={location.pathname === '/instructorDashboard' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                 Update All Courses
               </Box>
@@ -158,7 +177,13 @@ const AdminNavbar = () => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: "teal.500" }}
+                fontWeight={location.pathname === '/annoucement' ? 'bold' : 'normal'}
+                color={location.pathname === '/annoucement' ? 'teal.600' : undefined}
+                bg={location.pathname === '/annoucement' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                 Announcements
               </Box>
@@ -168,11 +193,17 @@ const AdminNavbar = () => {
                   onClose();
                 }}
                 cursor="pointer"
-                _hover={{ color: "teal.500" }}
+                fontWeight={location.pathname === '/profile' ? 'bold' : 'normal'}
+                color={location.pathname === '/profile' ? 'teal.600' : undefined}
+                bg={location.pathname === '/profile' ? 'teal.50' : undefined}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ color: 'teal.500', bg: 'teal.50' }}
               >
                 Profile
               </Box>
-              <Box onClick={handleLogout} color="red.500" cursor="pointer">
+              <Box onClick={handleLogout} color="red.500" cursor="pointer" px={2} py={1} borderRadius="md" fontWeight="bold" _hover={{ bg: 'red.50' }}>
                 Logout
               </Box>
             </VStack>
