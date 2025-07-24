@@ -35,7 +35,7 @@ const StudentDashboard = () => {
 
   const fetchAllCourses = async () => {
     try {
-      const res = await axios.get("https://skillgate.onrender.com/course/all");
+      const res = await axios.get("http://localhost:8000/course/all");
       setAllCourses(res.data.courses);
     } catch (error) {
       toast({ title: "Failed to fetch courses", status: "error" });
@@ -44,7 +44,7 @@ const StudentDashboard = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("https://skillgate.onrender.com/announcement/all");
+      const res = await axios.get("http://localhost:8000/announcement/all");
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch announcements", status: "error" });
@@ -67,7 +67,7 @@ const StudentDashboard = () => {
 
   try {
     const response = await axios.get(
-      `https://skillgate.onrender.com/course/enrollCourse/${courseId}`,
+      `http://localhost:8000/course/enrollCourse/${courseId}`,
 
       {
         headers: {

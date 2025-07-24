@@ -33,7 +33,7 @@ const StudentProfile = () => {
   const getProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get("https://skillgate.onrender.com/user/getProfile", {
+      const response = await axios.get("http://localhost:8000/user/getProfile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +82,7 @@ const StudentProfile = () => {
 
       console.log("Sending profile update:", profile);
 
-      const response = await axios.patch("https://skillgate.onrender.com/user/updateProfile", profile, {
+      const response = await axios.patch("http://localhost:8000/user/updateProfile", profile, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +112,7 @@ const StudentProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.patch("https://skillgate.onrender.com/user/updatePassword", passwords, {
+      await axios.patch("http://localhost:8000/user/updatePassword", passwords, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

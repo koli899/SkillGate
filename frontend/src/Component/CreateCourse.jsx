@@ -31,7 +31,7 @@ const CreateCourseModal = ({ onClose, onSuccess, isOpen }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('https://skillgate.onrender.com/course/create', form, {
+      await axios.post('http://localhost:8000/course/create', form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: 'Course created', status: 'success', duration: 3000 });
