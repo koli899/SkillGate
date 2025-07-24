@@ -10,7 +10,14 @@ const LessonRouter = require('./src/routes/lesson.route');
 const app = express();
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "https://skill-gate-chi.vercel.app",  
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  credentials: true
+}));
+
+
+app.options("*", cors());
 
 
 
