@@ -17,12 +17,15 @@ import UserProfile from "./UserProfile";
 import AdminHome from "./Component/Admin/AdminHome";
 import VerifyUser from "./Component/Admin/AdminVerify"; 
 import Announcements from "./Component/Admin/Announcements";
+import LandingPage from "./Component/LandingPage";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<UserProfile />} />
@@ -56,6 +59,7 @@ function App() {
         <Route path="*" element={<Navigate to="/register" replace />} />
       </Routes>
     </Router>
+    
   );
 }
 
