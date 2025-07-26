@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "https://skill-gate-chi.vercel.app",
+  origin: "https://skill-gate-alpha.vercel.app",
   origin: "http://localhost:5173",  
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true
