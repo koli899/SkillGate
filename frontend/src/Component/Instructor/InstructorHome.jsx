@@ -29,10 +29,11 @@ const InstructorHome = () => {
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-
+   const Base_url= import.meta.env.VITE_BASE_URL
+   
   const fetchAllCourses = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/course/all");
+      const res = await axios.get(`${Base_url}/course/all`);
       setAllCourses(res.data.courses);
     } catch (error) {
       toast({ title: "Failed to fetch courses", status: "error" });
@@ -41,7 +42,7 @@ const InstructorHome = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/announcement/all");
+      const res = await axios.get(`${Base_url}/announcement/all`);
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch announcements", status: "error" });

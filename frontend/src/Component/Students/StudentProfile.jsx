@@ -29,11 +29,12 @@ const StudentProfile = () => {
   });
 
   const toast = useToast();
+  const Base_url= import.meta.env.VITE_BASE_URL
 
   const getProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get("http://localhost:8000/user/getProfile", {
+      const response = await axios.get(`${Base_url}/user/getProfile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +83,7 @@ const StudentProfile = () => {
 
       console.log("Sending profile update:", profile);
 
-      const response = await axios.patch("http://localhost:8000/user/updateProfile", profile, {
+      const response = await axios.patch(`${Base_url}/user/updateProfile`, profile, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +113,7 @@ const StudentProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.patch("http://localhost:8000/user/updatePassword", passwords, {
+      await axios.patch(`${Base_url}/user/updatePassword`, passwords, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

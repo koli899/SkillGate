@@ -28,7 +28,7 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-
+const Base_url= import.meta.env.VITE_BASE_URL
   const handleChange = (name, value) => {
     setForm({ ...form, [name]: value });
     if (errors[name]) {
@@ -57,7 +57,7 @@ export default function Login() {
     setMessage("");
 
     try {
-      const response = await axios.post("http://localhost:8000/user/login", form, {
+      const response = await axios.post(`${Base_url}/user/login`, form, {
         headers: { "Content-Type": "application/json" },
       });
 

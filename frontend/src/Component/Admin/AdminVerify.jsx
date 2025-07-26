@@ -22,11 +22,12 @@ const AdminVerify = () => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
+  const Base_url= import.meta.env.VITE_BASE_URL
   const fetchUsers = async () => {
     setLoading(true);
     const token = localStorage.getItem('token');
     try {
-      const res = await axios.get('http://localhost:8000/user/getAllUsers', {
+      const res = await axios.get(`${Base_url}/user/getAllUsers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const filteredUsers = (res.data.users || []).filter(
@@ -50,7 +51,7 @@ const AdminVerify = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.patch(
-        `http://localhost:8000/user/VerifyUser/${id}`,
+        `${Base_url}/user/VerifyUser/${id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -75,7 +76,7 @@ const AdminVerify = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:8000/user/deleteUser/${id}`, {
+      await axios.delete(`${Base_url}/user/deleteUser/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({

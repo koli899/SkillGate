@@ -32,10 +32,10 @@ const StudentDashboard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const navigate = useNavigate();
-
+const Base_url= import.meta.env.VITE_BASE_URL
   const fetchAllCourses = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/course/all");
+      const res = await axios.get(`${Base_url}/course/all`);
       setAllCourses(res.data.courses);
     } catch (error) {
       toast({ title: "Failed to fetch courses", status: "error" });
@@ -44,7 +44,7 @@ const StudentDashboard = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/announcement/all");
+      const res = await axios.get(`${Base_url}/announcement/all`);
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch announcements", status: "error" });
@@ -67,7 +67,7 @@ const StudentDashboard = () => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8000/course/enrollCourse/${courseId}`,
+      `${Base_url}/course/enrollCourse/${courseId}`,
 
       {
         headers: {

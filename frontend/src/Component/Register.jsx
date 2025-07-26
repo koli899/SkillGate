@@ -31,7 +31,7 @@ export default function Register() {
     age: "",
     role: "student",
   });
-
+const Base_url= import.meta.env.VITE_BASE_URL
   //console.log(form)
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -91,7 +91,7 @@ export default function Register() {
       //await new Promise((resolve) => setTimeout(resolve, 2000));
       const response = await axios({
         method: "post",
-        url: "http://localhost:8000/user/register",
+        url: `${Base_url}/user/register`,
         data: form,
         headers: {
           "Content-Type": "application/json",

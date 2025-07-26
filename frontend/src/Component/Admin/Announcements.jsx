@@ -33,10 +33,11 @@ const Announcements = () => {
   const toast = useToast();
   const token = localStorage.getItem("token");
   const { isOpen, onOpen, onClose } = useDisclosure();
+   const Base_url= import.meta.env.VITE_BASE_URL
 
   const fetchAnnouncements = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/announcement/all");
+      const res = await axios.get(`${Base_url}/announcement/all`);
       setAnnouncements(res.data.announcements || []);
     } catch (error) {
       toast({ title: "Failed to fetch", status: "error" });
@@ -59,7 +60,7 @@ const Announcements = () => {
       let response;
       if (editId) {
         response = await axios.patch(
-          `http://localhost:8000/announcement/update/${editId}`,
+          `${Base_url}/announcement/update/${editId}`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -67,7 +68,7 @@ const Announcements = () => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:8000/announcement/create",
+          `${Base_url}/announcement/create`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -101,7 +102,7 @@ const Announcements = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/announcement/delete/${id}`, {
+      await axios.delete(`${Base_url}/announcement/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: "Announcement deleted", status: "success" });

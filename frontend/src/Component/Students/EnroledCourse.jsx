@@ -11,6 +11,7 @@ const EnroledCourse = () => {
   const [error, setError] = useState('');
   const [lessonModal, setLessonModal] = useState({ open: false, lesson: null, courseId: null, idx: null });
 
+  const Base_url= import.meta.env.VITE_BASE_URL
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -21,7 +22,7 @@ const EnroledCourse = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/course/yourCourses', {
+        const response = await axios.get(`${Base_url}/course/yourCourses`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +32,7 @@ const EnroledCourse = () => {
         // Fetch lessons for each course
         courseList.forEach(async (course) => {
           try {
-            const res = await axios.get(`http://localhost:8000/lesson/all/${course._id}`, {
+            const res = await axios.get(`${Base_url}/lesson/all/${course._id}`, {
               headers: { Authorization: `Bearer ${token}` },
             });
             const lessonArr = Array.isArray(res.data.lessons?.lessons)

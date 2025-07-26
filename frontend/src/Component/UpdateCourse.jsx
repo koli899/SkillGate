@@ -24,7 +24,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const token = localStorage.getItem('token');
-
+const Base_url= import.meta.env.VITE_BASE_URL
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -33,7 +33,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose }) => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `http://localhost:8000/course/updateCourse/${course._id}`,
+        `${Base_url}/course/updateCourse/${course._id}`,
         {
           course: form.course,
           description: form.description,

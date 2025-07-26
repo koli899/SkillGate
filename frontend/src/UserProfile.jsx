@@ -19,7 +19,7 @@ import InstructorNav from './Component/Instructor/InstructorNav';
 
 const UserProfile = () => {
      const user = JSON.parse(localStorage.getItem('user'));
-
+const Base_url= import.meta.env.VITE_BASE_URL
   const [isPasswordForm, setPasswordForm] = useState(false);
   const [profile, setProfile] = useState({
     name: '',
@@ -37,7 +37,7 @@ const UserProfile = () => {
   const getProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get("https://skillgate.onrender.com/user/getProfile", {
+      const response = await axios.get(`${Base_url}/user/getProfile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +77,7 @@ const UserProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.patch("https://skillgate.onrender.com/user/updateProfile", profile, {
+      await axios.patch(`${Base_url}/user/updateProfile`, profile, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,7 +103,7 @@ const UserProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.patch("https://skillgate.onrender.com/user/updatePassword", passwords, {
+      await axios.patch(`${Base_url}/user/updatePassword`, passwords, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

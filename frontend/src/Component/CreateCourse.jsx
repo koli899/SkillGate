@@ -24,6 +24,7 @@ const CreateCourseModal = ({ onClose, onSuccess, isOpen }) => {
 
   const toast = useToast();
   const token = localStorage.getItem('token');
+   const Base_url= import.meta.env.VITE_BASE_URL
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +32,7 @@ const CreateCourseModal = ({ onClose, onSuccess, isOpen }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/course/create', form, {
+      await axios.post(`${Base_url}/course/create`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: 'Course created', status: 'success', duration: 3000 });

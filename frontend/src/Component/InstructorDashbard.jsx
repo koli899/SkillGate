@@ -47,6 +47,8 @@ const InstructorDashboard = () => {
   const [lessonModal, setLessonModal] = useState({ open: false, lesson: null });
   const toast = useToast();
 
+   const Base_url= import.meta.env.VITE_BASE_URL
+
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isUpdateOpen, onOpen: onUpdateOpen, onClose: onUpdateClose } = useDisclosure();
 
@@ -55,7 +57,7 @@ const InstructorDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/course/yourCourses', {
+      const response = await axios.get(`${Base_url}/course/yourCourses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourses(response.data.courses || []);
@@ -67,13 +69,13 @@ const InstructorDashboard = () => {
   // Move these handlers to top-level scope
   const handleOpenUpdateCourse = async (course) => {
     try {
-      const res = await axios.get(`http://localhost:8000/course/${course._id}`, {
+      const res = await axios.update(`${Base_url}/course/${course._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSelectedCourse(res.data.course || course);
       setUpdateCourseModal({ open: true, course: res.data.course || course });
     } catch (err) {
-      toast({ title: 'Failed to fetch course details', status: 'error' });
+      //toast({ title: 'Failed to fetch course details', status: 'error' });
       setSelectedCourse(course);
       setUpdateCourseModal({ open: true, course });
     }
@@ -82,7 +84,7 @@ const InstructorDashboard = () => {
   const handleUpdateCourse = async (updatedFields) => {
     try {
       await axios.patch(
-        `http://localhost:8000/course/updateCourse/${selectedCourse._id}`,
+        `${Base_url}/course/updateCourse/${selectedCourse._id}`,
         updatedFields,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -98,7 +100,7 @@ const InstructorDashboard = () => {
   const handleDeleteCourse = async (courseId) => {
     if (window.confirm('Are you sure you want to delete this course and all its lessons?')) {
       try {
-        await axios.delete(`http://localhost:8000/course/deleteCourse/${courseId}`, {
+        await axios.delete(`${Base_url}/course/deleteCourse/${courseId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast({ title: 'Course and all lessons deleted', status: 'success' });
@@ -111,7 +113,7 @@ const InstructorDashboard = () => {
 
   const fetchLessons = async (courseId) => {
     try {
-      const res = await axios.get(`http://localhost:8000/lesson/all/${courseId}`, {
+      const res = await axios.get(`${Base_url}/lesson/all/${courseId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // API returns { lessons: { ...course, lessons: [array] } }
@@ -151,7 +153,7 @@ const InstructorDashboard = () => {
     try {
       const courseId = addLessonModal.courseId;
       await axios.post(
-        `http://localhost:8000/lesson/create/${courseId}`,
+        `${Base_url}/lesson/create/${courseId}`,
         { title: newLesson.title, summary: newLesson.summary },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -172,7 +174,7 @@ const InstructorDashboard = () => {
 
   const handleUpdateLesson = async () => {
     try {
-      await axios.patch(`http://localhost:8000/lesson/update/${editLessonModal.lesson._id}`, editLesson, {
+      await axios.patch(`${Base_url}/lesson/update/${editLessonModal.lesson._id}`, editLesson, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast({ title: 'Lesson updated', status: 'success' });
@@ -186,7 +188,7 @@ const InstructorDashboard = () => {
   const handleDeleteLesson = async (lessonId, courseId) => {
     if (window.confirm('Are you sure you want to delete this lesson?')) {
       try {
-        await axios.delete(`http://localhost:8000/lesson/delete/${lessonId}`, {
+        await axios.delete(`${Base_url}/lesson/delete/${lessonId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast({ title: 'Lesson deleted', status: 'success' });
